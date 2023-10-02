@@ -1,0 +1,33 @@
+<mat-card>
+  <mat-card-header class="card-header">
+    <mat-card-title>Lista de Vehículos</mat-card-title>
+    <button mat-raised-button color="primary">
+      <mat-icon>add</mat-icon>
+      Agregar
+    </button>
+  </mat-card-header>
+  <mat-card-content>
+
+    <mat-table [dataSource]="vehicles">
+
+      <ng-container matColumnDef="plate">
+        <mat-header-cell *matHeaderCellDef> Placa </mat-header-cell>
+        <mat-cell *matCellDef="let vehiculo"> {{ vehiculo.plate }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="color">
+        <mat-header-cell *matHeaderCellDef> Color </mat-header-cell>
+        <mat-cell *matCellDef="let vehiculo"> {{ vehiculo.color }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="brand">
+        <mat-header-cell *matHeaderCellDef> Marca </mat-header-cell>
+        <mat-cell *matCellDef="let vehiculo"> {{ vehiculo.brand.name }} </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="columnas"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: columnas;"></mat-row>
+    </mat-table>
+
+  </mat-card-content>
+</mat-card>
