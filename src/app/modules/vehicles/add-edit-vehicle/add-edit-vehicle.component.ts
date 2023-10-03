@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Brand } from 'src/app/shared/models/brand.model';
 import { VehicleService } from '../../../services/vehicle/vehicle.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-add-edit-vehicle',
@@ -10,7 +11,9 @@ import { VehicleService } from '../../../services/vehicle/vehicle.service';
 })
 export class AddEditVehicleComponent implements OnInit{
   private readonly fb = inject(FormBuilder);
-  private readonly vehicleService = inject(VehicleService) 
+  private readonly vehicleService = inject(VehicleService)
+  private readonly snackBar = inject(MatSnackBar); 
+
 
   public marcas : Brand[] = [{id: 1, name: "Chevrolet"}, {id: 2, name: "Renault"}];
   public vehicleForm!: FormGroup;
@@ -20,14 +23,10 @@ export class AddEditVehicleComponent implements OnInit{
   }
 
   public onSubmit(){
-    console.log(this.vehicleForm);
-    
     if (this.vehicleForm.invalid) return;
     
-    console.log(this.vehicleForm.value);
     this.vehicleService.createVehicle(this.vehicleForm.value).subscribe((res) => {
-      console.log(res);
-      
+      this.snackBar.open(`Se ha creado el vehículo con placa ${this.vehicleForm.value.plate} `)
     });
   }
 

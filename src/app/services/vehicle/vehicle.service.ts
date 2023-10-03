@@ -22,5 +22,10 @@ export class VehicleService {
     const url = `${environment.API_URL}/vehicle`;
     return this.http.post<void>(url, vehicle);
   }
+
+  public deleteVehicle(plate : string): Observable<void>{
+    const url = `${environment.API_URL}/vehicle`;
+    return this.http.delete<void>(url, {body: {plate}});
+  }
  
 }
