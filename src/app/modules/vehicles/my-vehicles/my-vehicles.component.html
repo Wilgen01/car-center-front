@@ -1,7 +1,7 @@
 <mat-card>
   <mat-card-header class="card-header">
     <mat-card-title>Lista de Vehículos</mat-card-title>
-    <button mat-raised-button color="primary">
+    <button mat-raised-button color="primary" (click)="openAddVehicleDialog()">
       <mat-icon>add</mat-icon>
       Agregar
     </button>
@@ -23,6 +23,18 @@
       <ng-container matColumnDef="brand">
         <mat-header-cell *matHeaderCellDef> Marca </mat-header-cell>
         <mat-cell *matCellDef="let vehiculo"> {{ vehiculo.brand.name }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="acciones">
+        <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
+        <mat-cell *matCellDef="let vehiculo">
+          <button mat-icon-button color="primary">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-cell>
       </ng-container>
 
       <mat-header-row *matHeaderRowDef="columnas"></mat-header-row>

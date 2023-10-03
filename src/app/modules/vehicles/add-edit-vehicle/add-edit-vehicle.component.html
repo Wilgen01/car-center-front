@@ -1,0 +1,29 @@
+<h2 mat-dialog-title>Agregar vehículo</h2>
+<form (ngSubmit)="onSubmit()" [formGroup]="vehicleForm">
+    <mat-dialog-content class="mat-typography">
+
+
+        <mat-form-field>
+            <mat-label>Placa</mat-label>
+            <input formControlName="plate" matInput placeholder="Placa" (input)="onInputPlate($event)" autocomplete="off">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Color</mat-label>
+            <input formControlName="color" matInput placeholder="Color" minlength="3" autocomplete="off">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Marca</mat-label>
+            <mat-select formControlName="brand_id">
+                <mat-option *ngFor="let marca of marcas" [value]="marca.id">
+                    {{ marca.name }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close type="button">Cancel</button>
+        <button mat-button type="submit">Guardar</button>
+    </mat-dialog-actions>
+</form>
