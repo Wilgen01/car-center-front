@@ -28,7 +28,7 @@
       <ng-container matColumnDef="acciones">
         <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
         <mat-cell *matCellDef="let vehiculo">
-          <button mat-icon-button color="primary">
+          <button mat-icon-button color="primary" (click)="openAddVehicleDialog(vehiculo)">
             <mat-icon>edit</mat-icon>
           </button>
           <button mat-icon-button color="warn" (click)="deleteVehicle(vehiculo.plate)">

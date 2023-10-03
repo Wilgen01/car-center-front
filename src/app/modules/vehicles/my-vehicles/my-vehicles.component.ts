@@ -31,19 +31,24 @@ export class MyVehiclesComponent implements OnInit {
     })
   }
 
-  public openAddVehicleDialog(): void {
+  public openAddVehicleDialog(vehicle? : Vehicle): void {
     const dialogRef = this.dialog.open(AddEditVehicleComponent, {
       width: '600px',
       autoFocus: false,
-      hasBackdrop: true
+      hasBackdrop: true,
+      data: vehicle
     });
+
+    dialogRef.afterClosed().subscribe(data => {
+      if (data?.ok) this.getVehicles(); 
+    })
   }
 
   public deleteVehicle(plate: string){
     console.log(plate);
     
     this.vehicleService.deleteVehicle(plate).subscribe(() => {
-      this.openSnackBar("Se ha eliminado el Vehículo con placa" + plate);
+      this.openSnackBar("Se ha eliminado el Vehículo con placa " + plate);
       this.getVehicles();
     });
   }
