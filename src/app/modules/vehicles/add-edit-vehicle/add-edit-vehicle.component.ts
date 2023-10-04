@@ -53,6 +53,7 @@ export class AddEditVehicleComponent implements OnInit {
   public onSubmit() {
     if (this.vehicleForm.invalid) return;
     this.isLoading = true;
+    this.vehicleForm.get('plate')?.enable();
 
     const formValue = this.vehicleForm.value;
 
