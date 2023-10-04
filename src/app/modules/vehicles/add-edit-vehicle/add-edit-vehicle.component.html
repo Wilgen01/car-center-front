@@ -14,8 +14,8 @@
         <mat-form-field>
             <mat-label>Marca</mat-label>
             <mat-select formControlName="brand_id">
-                <mat-option *ngFor="let marca of marcas" [value]="marca.id">
-                    {{ marca.name }}
+                <mat-option *ngFor="let brand of brands" [value]="brand.id">
+                    {{ brand.name }}
                 </mat-option>
             </mat-select>
         </mat-form-field>

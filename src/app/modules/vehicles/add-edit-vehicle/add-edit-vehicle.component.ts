@@ -5,6 +5,7 @@ import { VehicleService } from '../../../services/vehicle/vehicle.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Vehicle } from 'src/app/shared/models/vehicle.model';
+import { BrandService } from 'src/app/services/brand/brand.service';
 
 @Component({
   selector: 'app-add-edit-vehicle',
@@ -14,12 +15,13 @@ import { Vehicle } from 'src/app/shared/models/vehicle.model';
 export class AddEditVehicleComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
   private readonly vehicleService = inject(VehicleService)
+  private readonly brandService = inject(BrandService)
   private readonly snackBar = inject(MatSnackBar);
   private readonly dialogRef = inject(MatDialogRef<AddEditVehicleComponent>);
 
 
 
-  public marcas: Brand[] = [{ id: 1, name: "Chevrolet" }, { id: 2, name: "Renault" }];
+  public brands: Brand[] = [];
   public vehicleForm!: FormGroup;
   public vehicleToEdit: Vehicle | undefined = this.modalData;
   public operation: string = "Crear ";
@@ -31,6 +33,7 @@ export class AddEditVehicleComponent implements OnInit {
   ngOnInit(): void {
     this.initForm();
     this.setVehicleToEdit();
+    this.getBrands();
   }
 
   setVehicleToEdit() {
@@ -62,6 +65,14 @@ export class AddEditVehicleComponent implements OnInit {
       });
     }
 
+  }
+
+  public getBrands(){
+    this.brandService.getBrands().subscribe(
+      (data) => {
+        this.brands = data.result ?? [];
+      }
+    )
   }
 
   public onInputPlate(event: Event) {
