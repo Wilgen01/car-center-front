@@ -1,7 +1,7 @@
 <div class="container">
     <div class="card">
         <mat-card appearance="outlined">
-            <form novalidate >
+            <form novalidate [formGroup]="authForm" (ngSubmit)="onSubmit()">
                 <mat-card-content>
                     <h1>Login</h1>
                     <mat-form-field class="w-full">
@@ -16,7 +16,7 @@
                     </mat-form-field>
                     <mat-form-field class="w-full">
                         <mat-label>Password</mat-label>
-                        <input matInput  placeholder="Password">
+                        <input matInput type="password" placeholder="Password" formControlName="password">
                         <!-- <button type="button" matSuffix mat-icon-button (click)="showPassword = !showPassword">
                             <mat-icon *ngIf="showPassword">visibility</mat-icon>
                             <mat-icon *ngIf="!showPassword">visibility_off</mat-icon>
