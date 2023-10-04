@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
   }
 
   openSnackBar(message: string, action: string) {
-    this.snackBar.open(message, action, { duration: 5000 });
+    this.snackBar.open(message, action, { duration: 2000 });
   }
 
   public initForm() {
