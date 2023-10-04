@@ -24,6 +24,6 @@
 
     <mat-dialog-actions align="end">
         <button mat-button mat-dialog-close type="button">Cancel</button>
-        <button mat-button type="submit">Guardar</button>
+        <button mat-button type="submit" [disabled]="isLoading">Guardar</button>
     </mat-dialog-actions>
 </form>

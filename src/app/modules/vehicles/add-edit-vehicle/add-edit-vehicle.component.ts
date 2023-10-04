@@ -26,6 +26,7 @@ export class AddEditVehicleComponent implements OnInit {
   public vehicleToEdit: Vehicle | undefined = this.modalData;
   public operation: string = "Crear ";
   public isEdit: boolean = false;
+  public isLoading: boolean = true;
 
 
   constructor(@Inject(MAT_DIALOG_DATA) public modalData: Vehicle) { }
@@ -51,26 +52,32 @@ export class AddEditVehicleComponent implements OnInit {
 
   public onSubmit() {
     if (this.vehicleForm.invalid) return;
+    this.isLoading = true;
 
-    if (!this.isEdit) {
-      this.vehicleService.createVehicle(this.vehicleForm.value).subscribe(() => {
-        this.snackBar.open(`Se ha creado el vehículo con placa ${this.vehicleForm.value.plate} `, '', {duration: 2000});
-        this.dialogRef.close({ok: true})
-      });
-    }else{
-      this.vehicleForm.get('plate')?.enable();
-      this.vehicleService.updateVehicle(this.vehicleForm.value).subscribe(() => {
-        this.snackBar.open(`Se ha actualizado el vehículo con placa ${this.vehicleForm.value.plate} `, '', {duration: 2000});
-        this.dialogRef.close({ok: true})
-      });
-    }
+    const formValue = this.vehicleForm.value;
 
+    const operation = this.isEdit
+      ? this.vehicleService.updateVehicle(formValue)
+      : this.vehicleService.createVehicle(formValue);
+
+    operation.subscribe({
+      next: () => {
+        this.snackBar.open(`Se ha ${this.isEdit ? 'actualizado' : 'creado'} el vehículo con placa ${formValue.plate}`, '', { duration: 2000 });
+        this.dialogRef.close({ ok: true });
+      },
+      error: (error) => {
+        this.isLoading = false;
+        this.dialogRef.close();
+        this.snackBar.open('Hubo un error al guardar el vehículo.', '', { duration: 2000, panelClass: ['error-snackbar'] });
+      }
+    })
   }
 
-  public getBrands(){
+  public getBrands() {
     this.brandService.getBrands().subscribe(
       (data) => {
         this.brands = data.result ?? [];
+        this.isLoading = false;
       }
     )
   }
