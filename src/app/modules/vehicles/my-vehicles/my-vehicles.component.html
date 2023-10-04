@@ -8,30 +8,30 @@
   </mat-card-header>
   <mat-card-content>
 
-    <mat-table [dataSource]="vehicles">
+    <mat-table [dataSource]="vehicles" *ngIf="vehicles.length > 0 ; else emptyState">
 
       <ng-container matColumnDef="plate">
         <mat-header-cell *matHeaderCellDef> Placa </mat-header-cell>
-        <mat-cell *matCellDef="let vehiculo"> {{ vehiculo.plate }} </mat-cell>
+        <mat-cell *matCellDef="let vehicle"> {{ vehicle.plate }} </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="color">
         <mat-header-cell *matHeaderCellDef> Color </mat-header-cell>
-        <mat-cell *matCellDef="let vehiculo"> {{ vehiculo.color }} </mat-cell>
+        <mat-cell *matCellDef="let vehicle"> {{ vehicle.color }} </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="brand">
         <mat-header-cell *matHeaderCellDef> Marca </mat-header-cell>
-        <mat-cell *matCellDef="let vehiculo"> {{ vehiculo.brand.name }} </mat-cell>
+        <mat-cell *matCellDef="let vehicle"> {{ vehicle.brand.name }} </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="acciones">
         <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
-        <mat-cell *matCellDef="let vehiculo">
-          <button mat-icon-button color="primary" (click)="openAddVehicleDialog(vehiculo)">
+        <mat-cell *matCellDef="let vehicle">
+          <button mat-icon-button color="primary" (click)="openAddVehicleDialog(vehicle)">
             <mat-icon>edit</mat-icon>
           </button>
-          <button mat-icon-button color="warn" (click)="deleteVehicle(vehiculo.plate)">
+          <button mat-icon-button color="warn" (click)="deleteVehicle(vehicle.plate)">
             <mat-icon>delete</mat-icon>
           </button>
         </mat-cell>
@@ -40,6 +40,17 @@
       <mat-header-row *matHeaderRowDef="columnas"></mat-header-row>
       <mat-row *matRowDef="let row; columns: columnas;"></mat-row>
     </mat-table>
+
+    <ng-template #emptyState>
+      <mat-divider>
+      </mat-divider>
+      <div class="emptyState">
+        <h2>Agrega un Vehículo!!!</h2>
+        <p>Los vehículo que agregues aparecerá aquí!!</p>
+      </div>
+      
+    </ng-template>
+
 
   </mat-card-content>
 </mat-card>

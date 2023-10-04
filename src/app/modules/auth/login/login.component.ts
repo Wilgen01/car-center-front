@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(email, password)
       .subscribe({
         next: () => {
-          this.router.navigate(['/admin']);
+          this.router.navigate(['/admin/vehicles']);
         },
         error: () => {
           this.openSnackBar('Invalid credentials', 'Close');
@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
 
   public initForm() {
     this.authForm = this.fb.group({
-      email: ["1@gmail.com", Validators.required],
+      email: ["user@gmail.com", Validators.required],
       password: ["123456", Validators.required]
     })
   }

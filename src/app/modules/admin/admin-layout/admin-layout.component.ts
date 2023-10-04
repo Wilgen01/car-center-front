@@ -3,6 +3,8 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay} from 'rxjs/operators';
 import { MatDrawer } from '@angular/material/sidenav';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-admin-layout',
@@ -11,6 +13,8 @@ import { MatDrawer } from '@angular/material/sidenav';
 })
 export class AdminLayoutComponent {
   private breakpointObserver = inject(BreakpointObserver);
+  private authService = inject(AuthService);
+  private router = inject(Router);
   @ViewChild('drawer') drawer!: MatDrawer;
 
 
@@ -23,6 +27,11 @@ export class AdminLayoutComponent {
 
   toggleDrawer(){
     this.drawer.toggle();
+  }
+
+  public logout() {
+    this.authService.logout();
+    this.router.navigate(['/auth/login']);
   }
 
 }

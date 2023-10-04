@@ -13,9 +13,14 @@ export class AuthService {
 
   public login(username: string, password: string){
     const url: string = `${environment.API_URL}/auth/login`
+
     return this.http.post<{token: string}>(url, {username, password})
     .pipe(
       tap(data => this.tokenService.saveToken(data.token))
     )
+  }
+
+  public logout(){
+    this.tokenService.clearToken();
   }
 }

@@ -17,15 +17,15 @@
             </a>
             <a mat-list-item routerLink="/admin/vehicles">
                 <mat-icon matListItemIcon>directions_car</mat-icon>
-                Vehiculos
+                Vehículos
             </a>
             <mat-divider></mat-divider>
-            <div div mat-subheader>Users</div>
+            <!-- <div div mat-subheader>Users</div>
             <a mat-list-item routerLink="/admin/users">
                 <mat-icon matListItemIcon>group</mat-icon>
                 Users
-            </a>
-            <a mat-list-item>
+            </a> -->
+            <a mat-list-item (click)="logout()">
                 <mat-icon matListItemIcon>logout</mat-icon>
                 Logout
             </a>

@@ -10,7 +10,8 @@ const routes: Routes = [
   },
   {
     path : 'login',
-    component: LoginComponent
+    component: LoginComponent,
+    title: 'Carcenter - Login'
   }
 ];
 
