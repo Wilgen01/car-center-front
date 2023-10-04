@@ -15,7 +15,6 @@ export class AuthGuard {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
     const token = this.tokenService.getToken();
-    console.log('execute guard');
 
     if (!token) {
       return this.router.createUrlTree(['/auth/login']);

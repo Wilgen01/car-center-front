@@ -3,6 +3,9 @@ import { Injectable, inject } from '@angular/core';
 import { tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { TokenService } from '../token/token.service';
+import { Response } from 'src/app/shared/models/response.model';
+import { Profile } from 'src/app/shared/models/profile.model';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +21,15 @@ export class AuthService {
     .pipe(
       tap(data => this.tokenService.saveToken(data.token))
     )
+  }
+
+  public getProfile(){
+    const url: string = `${environment.API_URL}/auth/profile`
+
+    return this.http.get<Response<Profile>>(url).pipe(
+      map((result) => result.result)
+    );
+
   }
 
   public logout(){

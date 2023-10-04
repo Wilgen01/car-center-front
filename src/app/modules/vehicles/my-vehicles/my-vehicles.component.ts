@@ -45,8 +45,6 @@ export class MyVehiclesComponent implements OnInit {
   }
 
   public deleteVehicle(plate: string){
-    console.log(plate);
-    
     this.vehicleService.deleteVehicle(plate).subscribe(() => {
       this.openSnackBar("Se ha eliminado el Vehículo con placa " + plate);
       this.getVehicles();
