@@ -32,6 +32,7 @@ export class LoginComponent implements OnInit {
 
   public onSubmit() {
     if (this.authForm.invalid) return;
+
     const { name, email, password } = this.authForm.value
 
     const operation = this.currentTab == TabsNames.LOGIN
@@ -60,7 +61,6 @@ export class LoginComponent implements OnInit {
   }
 
   public onTabChange(tabIndex: number) {
-    // this.authForm.reset();
     tabIndex == TabsNames.LOGIN
       ? this.authForm.get('name')?.removeValidators(Validators.required)
       : this.authForm.get('name')?.addValidators(Validators.required);
