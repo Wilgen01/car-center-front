@@ -6,6 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Vehicle } from 'src/app/shared/models/vehicle.model';
 import { BrandService } from 'src/app/services/brand/brand.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-add-edit-vehicle',
@@ -66,10 +67,12 @@ export class AddEditVehicleComponent implements OnInit {
         this.snackBar.open(`Se ha ${this.isEdit ? 'actualizado' : 'creado'} el vehículo con placa ${formValue.plate}`, '', { duration: 2000 });
         this.dialogRef.close({ ok: true });
       },
-      error: (error) => {
+      error: (e : HttpErrorResponse) => {
         this.isLoading = false;
         this.dialogRef.close();
-        this.snackBar.open('Hubo un error al guardar el vehículo.', '', { duration: 2000, panelClass: ['error-snackbar'] });
+        e.status != 500
+          ? this.snackBar.open(e.error.message, '', { duration: 2000, panelClass: ['error-snackbar'] })
+          : this.snackBar.open('Hubo un error al guardar el vehículo.', '', { duration: 2000, panelClass: ['error-snackbar'] });
       }
     })
   }
