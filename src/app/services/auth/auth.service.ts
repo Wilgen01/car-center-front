@@ -23,6 +23,16 @@ export class AuthService {
     )
   }
 
+  public register(name: string, email: string, password: string ){
+    const url: string = `${environment.API_URL}/auth/register`
+    const roles = ["USER"]
+
+    return this.http.post<{token: string}>(url, {name, email, password, roles})
+    .pipe(
+      tap(data => this.tokenService.saveToken(data.token))
+    )
+  }
+
   public getProfile(){
     const url: string = `${environment.API_URL}/auth/profile`
 
