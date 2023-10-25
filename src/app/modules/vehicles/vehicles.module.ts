@@ -7,6 +7,7 @@ import { MaterialModule } from '../material/material.module';
 import { AddEditVehicleComponent } from './add-edit-vehicle/add-edit-vehicle.component';
 import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SharedComponentsModule } from 'src/app/shared/components/shared-components.module';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     VehiclesRoutingModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedComponentsModule
   ],
 })
 export class VehiclesModule { }
