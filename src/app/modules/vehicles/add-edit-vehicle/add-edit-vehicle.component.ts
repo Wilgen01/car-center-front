@@ -28,6 +28,7 @@ export class AddEditVehicleComponent implements OnInit {
   public operation: string = "Crear ";
   public isEdit: boolean = false;
   public isLoading: boolean = true;
+  public photos!: FileList;
 
 
   constructor(@Inject(MAT_DIALOG_DATA) public modalData: Vehicle) { }
@@ -60,14 +61,14 @@ export class AddEditVehicleComponent implements OnInit {
 
     const operation = this.isEdit
       ? this.vehicleService.updateVehicle(formValue)
-      : this.vehicleService.createVehicle(formValue);
+      : this.vehicleService.createVehicle(formValue , this.photos);
 
     operation.subscribe({
       next: () => {
         this.snackBar.open(`Se ha ${this.isEdit ? 'actualizado' : 'creado'} el vehículo con placa ${formValue.plate}`, '', { duration: 2000 });
         this.dialogRef.close({ ok: true });
       },
-      error: (e : HttpErrorResponse) => {
+      error: (e: HttpErrorResponse) => {
         this.isLoading = false;
         this.dialogRef.close();
         e.status != 500
@@ -97,6 +98,10 @@ export class AddEditVehicleComponent implements OnInit {
       color: ['', Validators.required],
       brand_id: ['', Validators.required]
     })
+  }
+
+  public onFileUpload(event: FileList) {
+    this.photos = event;
   }
 
 }

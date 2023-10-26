@@ -19,7 +19,8 @@
                 </mat-option>
             </mat-select>
         </mat-form-field>
-        <app-drag-and-drop></app-drag-and-drop>
+
+        <app-drag-and-drop (dropFiles)="onFileUpload($event)"></app-drag-and-drop>
 
     </mat-dialog-content>
 

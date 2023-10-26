@@ -18,9 +18,17 @@ export class VehicleService {
     return this.http.get<Response<Vehicle[]>>(url);
   }
 
-  public createVehicle(vehicle : Vehicle): Observable<void>{
+  public createVehicle(vehicle : Vehicle , photos: FileList): Observable<void>{
+    const formData = new FormData()
+    
+    formData.append("plate", vehicle.plate)
+    formData.append("color", vehicle.color)
+    if(vehicle.brand_id)
+      formData.append("brand_id", vehicle.brand_id.toString())
+    formData.append("photos", photos[0])
+
     const url = `${environment.API_URL}/vehicle`;
-    return this.http.post<void>(url, vehicle);
+    return this.http.post<void>(url, formData);
   }
 
   public updateVehicle(vehicle : Vehicle): Observable<void>{
