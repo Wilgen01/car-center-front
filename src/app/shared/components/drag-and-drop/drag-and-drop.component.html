@@ -1,4 +1,4 @@
-<div class="dropzone" fileDragDrop (filesChangeEmitter)="onFileChange($event)">
+<div class="dropzone" fileDragDrop (dropFiles)="onFileChange($event)">
     <div class="text-wrapper">
         <div class="centered">
             <input type="file" name="file" id="file" [multiple]="true">

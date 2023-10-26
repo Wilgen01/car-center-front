@@ -4,7 +4,7 @@ import { Directive, EventEmitter, HostBinding, HostListener, Output } from '@ang
   selector: '[fileDragDrop]'
 })
 export class FileDragDropDirective {
-  @Output() private filesChangeEmitter : EventEmitter<FileList> = new EventEmitter();
+  @Output() private dropFiles : EventEmitter<FileList> = new EventEmitter();
 
   
   @HostBinding('style.background') private background = '#eee';
@@ -37,6 +37,6 @@ export class FileDragDropDirective {
     let files = e.dataTransfer?.files;
     if (!files) return;
     let valid_files : FileList = files;
-    this.filesChangeEmitter.emit(valid_files);
+    this.dropFiles.emit(valid_files);
   }
 }
